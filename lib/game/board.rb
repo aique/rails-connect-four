@@ -18,11 +18,11 @@ class Board
             if @cells[row_index][column].empty?
                 @cells[row_index][column].value = mark
                 
-                return true
+                return [row_index, column]
             end
         end
 
-        false
+        nil
     end
 
     def available_column?(column)

@@ -1,11 +1,16 @@
 Import = Dry::AutoInject(Container)
 
 class Game
-    
+    WINNING_LINE_LENGTH = 4
+
     def initialize(board, display)
         @board = board
         @display = display
-        @players = [Player.new("Player 1", "x"), Player.new("Player 2", "o")]
+        @players = []
+    end
+
+    def append_player(player)
+        @players << player
     end
 
     def start
@@ -18,11 +23,10 @@ class Game
             active_player = @players[active_player_index]
             
             column = ask_to_move(active_player)
-            @board.insert_in_column(active_player.mark, column)
-            # active_player.append_position(position)
+            drop_token(active_player, column)
 
             active_player_index = (active_player_index + 1) % @players.length
-            winner = winner
+            winner = winner()
 
             break if winner || @board.full?
         end
@@ -42,7 +46,18 @@ class Game
         column.to_i - 1
     end
 
+    def drop_token(player, column)
+        cell = @board.insert_in_column(player.mark, column)
+        player.append_cell(cell)
+    end
+
     def winner
+        for player in @players
+            if player.has_winning_line?(WINNING_LINE_LENGTH)
+                return player
+            end
+        end
+
         nil
     end
 

@@ -9,21 +9,23 @@ require 'game/cell'
 describe Board do
 
     context "given an empty board" do
-        board = Container["board"]
-
-        it "should not be full" do
-            expect(board.full?).to eq(false)
+        before :each do
+            @board = Container["board"]
         end
 
+        it "should not be full" do
+            expect(@board.full?).to eq(false)
+        end
+        
         it "you should insert in any column" do
             for i in 0..Board::WIDTH - 1
-                expect(board.insert_in_column('x', i)).to eq(true)
+                expect(@board.insert_in_column('x', i)).to eq([Board::HEIGHT - 1, i])
             end
         end
 
         it "all columns should be availavle" do
             for i in 0..Board::WIDTH - 1
-                expect(board.insert_in_column('x', i)).to eq(true)
+                expect(@board.insert_in_column('x', i)).to eq([Board::HEIGHT - 1, i])
             end
         end
     end
@@ -40,7 +42,7 @@ describe Board do
         end
 
         it "you should not be able to insert" do
-            expect(board.insert_in_column('x', 0)).to eq(false)
+            expect(board.insert_in_column('x', 0)).to eq(nil)
         end
     end
 
