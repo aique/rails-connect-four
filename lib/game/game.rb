@@ -1,5 +1,3 @@
-Import = Dry::AutoInject(Container)
-
 class Game
     
     WINNING_LINE_LENGTH = 4
