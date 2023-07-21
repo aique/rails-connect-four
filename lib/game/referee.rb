@@ -9,8 +9,7 @@ class Referee
         width = cells[0].length
 
         height.times do |row|
-            width
-            .times do |column|
+            width.times do |column|
                 owner = cells[row][column].owner
 
                 next if owner == nil
