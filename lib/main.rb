@@ -15,8 +15,8 @@ class Main
 
     def play
         game = Container["game"]
-        game.append_player(Player.new("Player 1", "x"))
-        game.append_player(Player.new("Player 2", "o"))
+        game.append_player(Player.new("Player 1", "\e[33m\u25cf\e[0m"))
+        game.append_player(Player.new("Player 2", "\e[34m\u25cf\e[0m"))
         
         game.start
     end
