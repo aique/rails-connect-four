@@ -20,6 +20,7 @@ class Game
         active_player_index = 0
 
         loop do
+
             @display.show(@board)
             
             active_player = @players[active_player_index]
@@ -42,10 +43,18 @@ class Game
 
         loop do
             column = @display.ask_to_move(player)
-            break if column.match(/[1-#{Board::WIDTH}]/) && @board.available_column?(column.to_i - 1)
+            break if valid_column?(column) && available_column?(column)
         end
 
         column.to_i - 1
+    end
+
+    def valid_column?(column)
+        column.match(/[1-#{Board::WIDTH}]/)
+    end
+
+    def available_column?(column)
+        @board.available_column?(column.to_i - 1)
     end
 
     def drop_token(player, column)

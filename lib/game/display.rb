@@ -5,20 +5,20 @@ class Display
 
         board.cells.each do |row|
 
-            for i in 1..row.length do
+            row.length.times do
                 print "+---+"
             end
 
             print "\n"
 
             row.each do |cell|
-                print "| #{cell.value} |"
+                print "| #{cell.owner ? cell.owner.mark : " "} |"
             end
 
             print "\n"
         end
 
-        for i in 1..board.cells[0].length do
+        board.cells[0].length.times do
             print "+---+"
         end
 
