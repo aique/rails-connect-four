@@ -12,9 +12,10 @@ class Board
     def insert_in_column(player, column)
         HEIGHT.times do |i|
             row_index = HEIGHT - 1 - i
+            current_cell = @cells[row_index][column]
 
-            if @cells[row_index][column].empty?
-                @cells[row_index][column].owner = player
+            if current_cell.empty?
+                current_cell.owner = player
                 return true
             end
         end
@@ -23,14 +24,12 @@ class Board
     end
 
     def available_column?(column)
-        return @cells[0][column].empty?
+        @cells[0][column].empty?
     end
 
     def full?
         WIDTH.times do |column|
-            if available_column?(column)
-                return false
-            end
+            return false if available_column?(column)
         end
 
         true
