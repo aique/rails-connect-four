@@ -1,10 +1,12 @@
 Import = Dry::AutoInject(Container)
 
 class Game
+    
     WINNING_LINE_LENGTH = 4
 
-    def initialize(board, display)
+    def initialize(board, referee, display)
         @board = board
+        @referee = referee
         @display = display
         @players = []
     end
@@ -53,7 +55,7 @@ class Game
 
     def winner
         for player in @players
-            if player.has_winning_line?(WINNING_LINE_LENGTH)
+            if @referee.has_winning_line?(player.cells, WINNING_LINE_LENGTH)
                 return player
             end
         end

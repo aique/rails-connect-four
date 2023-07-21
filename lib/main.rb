@@ -8,6 +8,7 @@ require_relative 'game/game'
 require_relative 'game/cell'
 require_relative 'game/board'
 require_relative 'game/player'
+require_relative 'game/referee'
 require_relative 'game/display'
 
 class Main
