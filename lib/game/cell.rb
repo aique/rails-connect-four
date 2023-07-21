@@ -1,14 +1,12 @@
 class Cell
     
-    EMPTY_VALUE = " "
-
-    attr_accessor :value
+    attr_accessor :owner
 
     def initialize
-        @value = EMPTY_VALUE
+        @owner = nil
     end
 
     def empty?
-        @value == EMPTY_VALUE
+        @owner == nil
     end
 end

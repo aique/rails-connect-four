@@ -49,18 +49,11 @@ class Game
     end
 
     def drop_token(player, column)
-        cell = @board.insert_in_column(player.mark, column)
-        player.append_cell(cell)
+        @board.insert_in_column(player, column)
     end
 
     def winner
-        for player in @players
-            if @referee.has_winning_line?(player.cells, WINNING_LINE_LENGTH)
-                return player
-            end
-        end
-
-        nil
+        @referee.winner(@board.cells, WINNING_LINE_LENGTH)
     end
 
 end

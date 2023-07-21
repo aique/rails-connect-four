@@ -1,81 +1,65 @@
 class Referee
 
-    def has_winning_line?(cells, length)
+    def winner(cells, length)
+        winning_line_owner(cells, length)
+    end
+
+    def winning_line_owner(cells, length)
         Board::HEIGHT.times do |row|
             Board::WIDTH.times do |column|
-                if winning_horizontal_line?(cells, row, column, length)
-                    return true
-                end
+                owner = cells[row][column].owner
 
-                if winning_vertical_line?(cells, row, column, length)
-                    return true
-                end
+                next if owner == nil
 
-                if winning_diagonal_line?(cells, row, column, length)
-                    return true
-                end
+                return owner if winning_horizontal_line?(cells, row, column, owner, length)
+                return owner if winning_vertical_line?(cells, row, column, owner, length)
+                return owner if winning_diagonal_line?(cells, row, column, owner, length)
             end
         end
 
-        false
+        nil
     end
 
-    private def winning_horizontal_line?(cells, row, column, length)
-        if column > length - 1
-            return false
-        end
+    private def winning_horizontal_line?(cells, row, column, owner, length)
+        return false if column > length - 1
 
         length.times do |i|
-            if cells[row][column + i] == false
-                return false
-            end
+            return false if cells[row][column + i].owner != owner
         end
 
         true
     end
 
-    private def winning_vertical_line?(cells, row, column, length)
-        if row < length - 1
-            return false
-        end
+    private def winning_vertical_line?(cells, row, column, owner, length)
+        return false if row < length - 1
 
         length.times do |i|
-            if cells[row - i][column] == false
-                return false
-            end
+            return false if cells[row - i][column].owner != owner
         end
 
         true
     end
 
-    private def winning_diagonal_line?(cells, row, column, length)
-        winning_left_diagonal?(cells, row, column, length) ||
-        winning_right_diagonal?(cells, row, column, length)
+    private def winning_diagonal_line?(cells, row, column, owner, length)
+        winning_left_diagonal?(cells, row, column, owner, length) ||
+        winning_right_diagonal?(cells, row, column, owner, length)
     end
 
-    private def winning_right_diagonal?(cells, row, column, length)
-        if row < length - 1 || column > length - 1
-            return false
-        end
+    private def winning_right_diagonal?(cells, row, column, owner, length)
+        return false if row < length - 1 || column > length - 1
 
         length.times do |i|
-            if cells[row - i][column + i] == false
-                return false
-            end
+            return false if cells[row - i][column + i].owner != owner
         end
         
         true
     end
 
-    private def winning_left_diagonal?(cells, row, column, length)
-        if row < length - 1 || column < length - 1
-            return false
-        end
+    private def winning_left_diagonal?(cells, row, column, owner, length)
+        return false if row < length - 1 || column < length - 1
 
         length.times do |i|
-            if cells[row - i][column - i] == false
-                return false
-            end
+            return false if cells[row - i][column - i].owner != owner
         end
         
         true
