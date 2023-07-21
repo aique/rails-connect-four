@@ -5,8 +5,12 @@ class Referee
     end
 
     def winning_line_owner(cells, length)
-        Board::HEIGHT.times do |row|
-            Board::WIDTH.times do |column|
+        height = cells.length
+        width = cells[0].length
+
+        height.times do |row|
+            width
+            .times do |column|
                 owner = cells[row][column].owner
 
                 next if owner == nil

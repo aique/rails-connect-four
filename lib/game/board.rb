@@ -10,8 +10,10 @@ class Board
     end
 
     def insert_in_column(player, column)
-        HEIGHT.times do |i|
-            row_index = HEIGHT - 1 - i
+        height = @cells.length
+
+        height.times do |i|
+            row_index = height - 1 - i
             current_cell = @cells[row_index][column]
 
             if current_cell.empty?
@@ -28,7 +30,9 @@ class Board
     end
 
     def full?
-        WIDTH.times do |column|
+        width = @cells[0].length
+
+        width.times do |column|
             return false if available_column?(column)
         end
 

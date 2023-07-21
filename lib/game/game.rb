@@ -50,7 +50,12 @@ class Game
     end
 
     def valid_column?(column)
-        column.match(/[1-#{Board::WIDTH}]/)
+        match = /^\d+$/.match(column)
+        
+        return false if !match
+
+        column = column.to_i
+        column > 0 && column <= @board.cells[0].length
     end
 
     def available_column?(column)
